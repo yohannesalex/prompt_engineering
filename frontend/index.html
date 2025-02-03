@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Poetry Generator</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>AI Poetry Generator</h1>
+    <p>Turn your thoughts into beautiful poems!</p>
+
+    <!-- Input Section -->
+    <div class="input-section">
+      <textarea id="user-input" placeholder="Enter a theme or keyword (e.g., love, nature)"></textarea>
+      <select id="tone-select">
+        <option value="romantic">Romantic</option>
+        <option value="funny">Funny</option>
+        <option value="serious">Serious</option>
+      </select>
+      <button id="generate-btn">Generate Poem</button>
+    </div>
+
+    <!-- Output Section -->
+    <div class="output-section">
+      <h2>Generated Poem</h2>
+      <div id="output-text"></div>
+      <button id="refine-btn">Refine Poem</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
