@@ -2,4 +2,3 @@ flask
 flask_cors
 langchain
 google.generativeai
-os
