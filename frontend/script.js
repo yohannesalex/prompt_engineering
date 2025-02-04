@@ -78,7 +78,7 @@ async function generatePoem() {
   const fullPrompt = `${fewShot}\n\nWrite a ${tone} poem about ${prompt}. ${context}`;
 
   try {
-    const response = await fetch("http://127.0.0.1:5000/api/generate", {
+    const response = await fetch("https://prompt-engineering-1.onrender.com/api/generate", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -111,7 +111,7 @@ async function refinePoem() {
   const fullPrompt = `${userFeedback}\n\nPrevious Poem:\n${previousOutput}`;
 
   try {
-    const response = await fetch("http://127.0.0.1:5000/api/refine", {
+    const response = await fetch("https://prompt-engineering-1.onrender.com/api/refine", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
