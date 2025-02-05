@@ -41,7 +41,7 @@ p {
 
 textarea {
   width: 100%;
-  height: 100px;
+  height: 40px;
   padding: 0.5rem;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -169,4 +169,32 @@ button:hover {
 
 .popup-buttons button {
   width: 48%;
+}
+/* Conversation History Section */
+.conversation-section {
+  margin-top: 2rem;
+  text-align: left;
+}
+
+#conversation-history {
+  background-color: #f9f9f9;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.conversation-entry {
+  margin-bottom: 1rem;
+}
+
+.conversation-entry .user {
+  font-weight: bold;
+  color: #007bff;
+}
+
+.conversation-entry .ai {
+  font-weight: bold;
+  color: #28a745;
 }

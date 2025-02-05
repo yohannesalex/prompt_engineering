@@ -7,6 +7,8 @@ const generateBtn = document.getElementById("generate-btn");
 const refineBtn = document.getElementById("refine-btn");
 const editParamsBtn = document.getElementById("edit-params-btn");
 const outputText = document.getElementById("output-text");
+const userFeedback = document.getElementById("user-feedback");
+const conversationHistory = document.getElementById("conversation-history");
 
 // Popup Elements
 const paramsPopup = document.getElementById("params-popup");
@@ -62,6 +64,15 @@ function applyParams() {
   closePopup();
 }
 
+// Add conversation entry to the UI
+function addConversationEntry(role, text) {
+  const entry = document.createElement("div");
+  entry.classList.add("conversation-entry");
+  entry.innerHTML = `<span class="${role}">${role.toUpperCase()}:</span> ${text}`;
+  conversationHistory.appendChild(entry);
+  conversationHistory.scrollTop = conversationHistory.scrollHeight; // Auto-scroll to the latest entry
+}
+
 // Generate Poem
 async function generatePoem() {
   const prompt = userInput.value;
@@ -75,7 +86,10 @@ async function generatePoem() {
   }
 
   // Combine prompt, context, and few-shot examples
-  const fullPrompt = `${fewShot}\n\nWrite a ${tone} poem about ${prompt}. ${context}`;
+  const fullPrompt = `like this example${fewShot}\n\nWrite a ${tone} poem about ${prompt}. ${context}`;
+
+  // Add user input to conversation history
+  addConversationEntry("user", fullPrompt);
 
   try {
     const response = await fetch("https://prompt-engineering-1.onrender.com/api/generate", {
@@ -91,6 +105,9 @@ async function generatePoem() {
 
     const data = await response.json();
     outputText.textContent = data.output;
+
+    // Add AI response to conversation history
+    addConversationEntry("ai", data.output);
   } catch (error) {
     console.error("Error generating poem:", error);
     outputText.textContent = "Failed to generate poem. Please try again.";
@@ -99,16 +116,19 @@ async function generatePoem() {
 
 // Refine Poem
 async function refinePoem() {
-  const userFeedback = document.getElementById("user-feedback").value;
+  const feedback = userFeedback.value;
   const previousOutput = outputText.textContent;
 
-  if (!userFeedback || !previousOutput) {
+  if (!feedback || !previousOutput) {
     alert("Please generate a poem first and provide feedback!");
     return;
   }
 
   // Combine user feedback and previous output
-  const fullPrompt = `${userFeedback}\n\nPrevious Poem:\n${previousOutput}`;
+  const fullPrompt = `${feedback}\n\nPrevious Poem:\n${previousOutput}`;
+
+  // Add user feedback to conversation history
+  addConversationEntry("user", fullPrompt);
 
   try {
     const response = await fetch("https://prompt-engineering-1.onrender.com/api/refine", {
@@ -124,6 +144,9 @@ async function refinePoem() {
 
     const data = await response.json();
     outputText.textContent = data.output;
+
+    // Add AI response to conversation history
+    addConversationEntry("ai", data.output);
   } catch (error) {
     console.error("Error refining poem:", error);
     outputText.textContent = "Failed to refine poem. Please try again.";
