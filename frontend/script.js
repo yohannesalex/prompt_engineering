@@ -100,7 +100,7 @@ async function generatePoem() {
   addMessage("user", fullPrompt);
 
   try {
-    const response = await fetch("http://127.0.0.1:5000/api/generate", {
+    const response = await fetch("https://poem-generator-mab0.onrender.com/api/generate", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -136,7 +136,7 @@ async function refinePoem() {
   addMessage("user", feedback);
 
   try {
-    const response = await fetch(" http://127.0.0.1:5000/api/refine", {
+    const response = await fetch("https://poem-generator-mab0.onrender.com/api/refine", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
