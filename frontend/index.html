@@ -7,36 +7,27 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="container">
-    <h1>AI Poetry Generator</h1>
-    <p>Turn your thoughts into beautiful poems!</p>
+  <div class="chat-container">
+    <!-- Chat Header -->
+    <div class="chat-header">
+      <h1>AI Poetry Generator</h1>
+      <p>Turn your thoughts into beautiful poems!</p>
+    </div>
 
-    <!-- Input Section -->
-    <div class="input-section">
+    <!-- Chat Messages -->
+    <div class="chat-messages" id="chat-messages">
+      <!-- Messages will be dynamically added here -->
+    </div>
+
+    <!-- Chat Input -->
+    <div class="chat-input">
       <textarea id="user-input" placeholder="Enter a theme or keyword (e.g., love, nature)"></textarea>
       <textarea id="context-input" placeholder="Provide additional context (e.g., tone, audience)"></textarea>
       <textarea id="few-shot-examples" placeholder="Provide examples (e.g., Example 1: Roses are red...\nExample 2: Love is like a river...)"></textarea>
-      <select id="tone-select">
-        <option value="romantic">Romantic</option>
-        <option value="funny">Funny</option>
-        <option value="serious">Serious</option>
-      </select>
       <button id="generate-btn">Generate Poem</button>
-      <button id="edit-params-btn">Edit Parameters</button>
-    </div>
-
-    <!-- Output Section -->
-    <div class="output-section">
-      <h2>Generated Poem</h2>
-      <div id="output-text"></div>
-      <textarea id="user-feedback" placeholder="Provide feedback to refine the poem..."></textarea>
+      <textarea id="refine-input" placeholder="Provide feedback to refine the poem..."></textarea>
       <button id="refine-btn">Refine Poem</button>
-    </div>
-
-    <!-- Conversation History -->
-    <div class="conversation-section">
-      <h2>Conversation History</h2>
-      <div id="conversation-history"></div>
+      <button id="edit-params-btn">Edit Parameters</button>
     </div>
 
     <!-- Parameters Popup -->
