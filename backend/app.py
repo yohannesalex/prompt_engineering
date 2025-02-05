@@ -16,7 +16,7 @@ model = genai.GenerativeModel("gemini-pro")
 # Initialize ConversationBufferMemory
 memory = ConversationBufferMemory()
 
-# Generate endpoint
+
 @app.route("/api/generate", methods=["POST"])
 def generate():
     try:
@@ -71,14 +71,18 @@ def refine():
     try:
         # Get data from the request
         data = request.json
-        prompt = data.get("prompt")
+        feedback = data.get("prompt")  # User feedback
+        previous_output = data.get("previous_output")  # Previous poem
         temperature = data.get("temperature", 0.7)
         max_tokens = data.get("max_tokens", 100)
         top_p = data.get("top_p", 0.9)
 
+        # Combine feedback and previous output
+        full_prompt = f"Refine the following poem based on the feedback: {feedback}\n\nPoem:\n{previous_output}"
+
         # Generate refined response using Gemini API
         response = model.generate_content(
-            prompt,
+            full_prompt,
             generation_config={
                 "temperature": temperature,
                 "max_output_tokens": max_tokens,
